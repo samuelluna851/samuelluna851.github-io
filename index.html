@@ -3,114 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lluvia de te amo para Perla</title>
+<title>Te Amo Perla 💕</title>
 <style>
   body {
     margin: 0;
-    height: 100vh;
-    background: #ffeff5;
+    padding: 0;
+    background: #111;
     overflow: hidden;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'cursive', sans-serif;
   }
 
-  .container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mensaje {
+  .word {
     position: absolute;
-    top: 40%;
-    width: 100%;
-    text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
-    color: #e60073;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-    animation: latido 1.5s infinite;
-    z-index: 10;
+    font-size: 20px;
+    color: #ff69b4;
+    user-select: none;
+    transition: transform 0.3s, font-size 0.3s;
+    cursor: pointer;
   }
 
-  @keyframes latido {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-  }
-
-  .heart {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    transform: rotate(-45deg);
-    animation: fall linear infinite;
-    opacity: 0.8;
-  }
-
-  .heart::before,
-  .heart::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    border-radius: 50%;
-  }
-
-  .heart::before {
-    top: -10px;
-    left: 0;
-  }
-
-  .heart::after {
-    left: 10px;
-    top: 0;
-  }
-
-  @keyframes fall {
-    0% {
-      transform: translateY(-10%) rotate(-45deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh) rotate(-45deg);
-      opacity: 0.5;
-    }
+  .word:hover {
+    font-size: 40px;
+    transform: scale(1.5);
   }
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="mensaje">💖 Te amo Perla 💖</div>
+<script>
+  const words = ["te amo Perla"];
+  const numWords = 30;
 
-    <!-- te amo -->
-    <div class="i love you" style="left: 50%; animation-duration: 5s;"></div>
-    <div class="i love you" style="left: 10%; animation-duration: 6s;"></div>
-    <div class="i love you" style="left: 5%; animation-duration: 4s;"></div>
-    <div class="i love you" style="left: 7%; animation-duration: 7s;"></div>
-    <div class="i love you" style="left: 9%; animation-duration: 3s;"></div>
-    <div class="i love you" style="left: 20%; animation-duration: 5s;"></div>
-    <div class="i love you" style="left: 35%; animation-duration: 6s;"></div>
-    <div class="i love you" style="left: 5%; animation-duration: 4s;"></div>
-    <div class="i love you" style="left: 8%; animation-duration: 7s;"></div>
-    <div class="i love you" style="left: 12%; animation-duration: 3s;"></div>
-    <div class="i love you" style="left: 30%; animation-duration: 5s;"></div>
-    <div class="i love you" style="left: 40%; animation-duration: 6s;"></div>
-    <div class="i love you" style="left: 60%; animation-duration: 4s;"></div>
-    <div class="i love you" style="left: 80%; animation-duration: 7s;"></div>
-    <div class="i love you" style="left: 65%; animation-duration: 3s;"></div>
-    <div class="i love you" style="left: 10%; animation-duration: 5s;"></div>
-    <div class="i love you" style="left: 30%; animation-duration: 6s;"></div>
-    <div class="i love you" style="left: 60%; animation-duration: 4s;"></div>
-    <div class="i love you" style="left: 70%; animation-duration: 7s;"></div>
-    <div class="i love you" style="left: 90%; animation-duration: 3.5s;"></div>
-  </div>
+  for(let i=0; i<numWords; i++){
+    const div = document.createElement('div');
+    div.className = 'word';
+    div.innerText = words[0];
+    document.body.appendChild(div);
+
+    // Posición inicial random
+    div.style.left = Math.random() * window.innerWidth + 'px';
+    div.style.top = -50 - Math.random() * 200 + 'px';
+
+    // Animación de caída
+    let speed = 1 + Math.random() * 3;
+    function fall() {
+      let top = parseFloat(div.style.top);
+      if(top > window.innerHeight){
+        div.style.top = -50 + 'px';
+        div.style.left = Math.random() * window.innerWidth + 'px';
+      } else {
+        div.style.top = top + speed + 'px';
+      }
+      requestAnimationFrame(fall);
+    }
+    fall();
+  }
+</script>
 </body>
 </html>
